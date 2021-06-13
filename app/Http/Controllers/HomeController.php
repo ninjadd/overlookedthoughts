@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $forums = Forum::paginate(10);
+        $forums = Forum::orderBy('created_at', 'DESC')->paginate(10);
 
         return view('home', compact('forums'));
     }

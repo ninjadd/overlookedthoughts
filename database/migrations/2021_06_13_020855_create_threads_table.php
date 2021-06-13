@@ -20,6 +20,8 @@ class CreateThreadsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('body');
+            $table->unsignedTinyInteger('positive')->nullable();
+            $table->unsignedTinyInteger('negative')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

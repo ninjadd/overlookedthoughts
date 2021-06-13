@@ -43,7 +43,7 @@ class ForumController extends Controller
 
         event(new NewForumEvent($request));
 
-        return $request->all();
+        return redirect()->route('home')->with('status', 'You have added a new Fourm. Now it needs at least one Topic to start a Thread.');
     }
 
     /**

@@ -19,6 +19,8 @@ class CreateForumsTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');
+            $table->unsignedTinyInteger('positive')->nullable();
+            $table->unsignedTinyInteger('negative')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
