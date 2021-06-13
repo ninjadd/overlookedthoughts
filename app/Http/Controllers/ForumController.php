@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewForumEvent;
 use App\Models\Forum;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,14 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:3|max:255',
+            'description' => 'min:3|max:255',
+        ]);
+
+        event(new NewForumEvent($request));
+
+        return $request->all();
     }
 
     /**

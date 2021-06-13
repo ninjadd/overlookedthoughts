@@ -20,3 +20,6 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('forums', [App\Http\Controllers\ForumController::class, 'store'])->name('forms.store')->middleware('web');
+
