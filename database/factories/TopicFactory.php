@@ -2,19 +2,20 @@
 
 namespace Database\Factories;
 
+use App\Models\Topic;
 use App\Models\Forum;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-class ForumFactory extends Factory
+class TopicFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Forum::class;
+    protected $model = Topic::class;
 
     /**
      * Define the model's default state.
@@ -26,9 +27,11 @@ class ForumFactory extends Factory
         $userIds = User::all()->pluck('id');
         $title = $this->faker->sentence('2');
         $slug = Str::slug($title);
+        $forumIds = Forum::all()->pluck('id');
 
         return [
             'user_id' => $this->faker->randomElement($userIds),
+            'forum_id' => $this->faker->randomElement($forumIds),
             'title' => $title,
             'slug' => $slug,
             'description' => $this->faker->paragraph(2)
