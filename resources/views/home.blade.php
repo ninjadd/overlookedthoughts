@@ -14,7 +14,39 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    @auth
+                        <p class="lead">You're logged in!</p>
+                    @else
+                        <p class="lead">Please login if you'd like to post to this Forum</p>
+                    @endauth
+
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Forums
+                                </th>
+                                <th>
+                                    Topics
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($forums->load('topics') as $forum)
+                            <tr>
+                                <td>
+                                    {{ $forum->title }}
+                                </td>
+                                <td>
+                                    {{ $forum->topics->count() }}
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    {{ $forums->links('vendor.pagination.bootstrap-4') }}
+
                 </div>
             </div>
         </div>
