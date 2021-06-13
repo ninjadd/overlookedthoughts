@@ -31,7 +31,7 @@ class ForumFactory extends Factory
             'user_id' => $this->faker->randomElement($userIds),
             'title' => $title,
             'slug' => $slug,
-            'description' => $this->faker->paragraph(2)
+            'description' => $this->faker->paragraph(7)
         ];
     }
 }

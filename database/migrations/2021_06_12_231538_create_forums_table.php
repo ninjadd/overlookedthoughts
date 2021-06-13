@@ -18,7 +18,7 @@ class CreateForumsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->tinyText('description');
+            $table->text('description');
             $table->softDeletes();
             $table->timestamps();
         });
