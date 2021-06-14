@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewTopicEvent;
+use App\Models\Forum;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,11 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Forum $forum)
     {
-        //
+        $topics = Topic::where('forum_id', $forum->id)->orderBy('updated_at', 'DESC')->paginate(10);
+
+        return view('topics.index', compact('topics', 'forum'));
     }
 
     /**
@@ -35,7 +39,14 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:3|max:255',
+            'description' => 'min:3|max:255',
+        ]);
+
+        event(new NewTopicEvent($request));
+
+        return redirect()->back()->with('status', 'You have gone ahead and added a new Topic to this Forum. Congrats!!');
     }
 
     /**

@@ -25,7 +25,7 @@ class TopicFactory extends Factory
     public function definition()
     {
         $userIds = User::all()->pluck('id');
-        $title = $this->faker->sentence('2');
+        $title = $this->faker->words('2', true);
         $slug = Str::slug($title);
         $forumIds = Forum::all()->pluck('id');
 

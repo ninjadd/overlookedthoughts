@@ -3,11 +3,10 @@
 namespace App\Providers;
 
 use App\Events\NewForumEvent;
+use App\Events\NewTopicEvent;
 use App\Listeners\NewForumListener;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use App\Listeners\NewTopicListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -20,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         NewForumEvent::class => [
             NewForumListener::class,
         ],
+        NewTopicEvent::class => [
+            NewTopicListener::class,
+        ]
     ];
 
     /**

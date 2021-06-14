@@ -23,3 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('forums', [App\Http\Controllers\ForumController::class, 'store'])->name('forms.store')->middleware('web');
 
+Route::get('forums/{forum}/topics', [App\Http\Controllers\TopicController::class, 'index'])->name('topics.index');
+
+Route::post('forums/{forum}/topics', [App\Http\Controllers\TopicController::class, 'store'])->name('topics.store')->middleware('web');
+

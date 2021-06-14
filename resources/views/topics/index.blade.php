@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Home</h4>
+                    <h4 class="card-title">Topics</h4>
                 </div>
 
                 <div class="card-body">
@@ -14,22 +14,24 @@
                     @include('layouts.messages')
 
                     @auth
-                        <p>Feel free to add a new Forum and see how many Topics &amp; Threads will be started as a result.</p>
-                        <form class="form" method="POST" action="{{ route('forms.store') }}">
+                        <p>We want to see how many people will engage.
+                            Feel free to add a new Topic to <strong>{{ $forum->title }}</strong>.</p>
+                        <form class="form" method="POST" action="{{ route('topics.store', $forum->id) }}">
                             @csrf
                             <div class="row col-sm-12">
                                 <div class="col-sm-4">
-                                    <input required type="text" class="form-control" placeholder="Forum Title" aria-label="Forum Title" name="title">
+                                    <input required type="text" class="form-control" placeholder="Topic Title" aria-label="Topic Title" name="title">
                                 </div>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" placeholder="Short Description" aria-label="Short Description" name="description">
                                 </div>
                                 <div class="col-sm-4">
-                                    <button type="submit" class="btn btn-primary">Create New Forum</button>
+                                    <input type="hidden" name="forum_id" value="{{ $forum->id }}">
+                                    <button type="submit" class="btn btn-primary">Create New Topic</button>
                                 </div>
                             </div>
-                          </form>
-                          <p class="lead"> </p>
+                        </form>
+                        <p class="lead"> </p>
                     @else
                         <p class="lead">Please login if you'd like to post {{ config('app.name') }}.
                             Or if you'd like to do anything else logging in would be the way to go.</p>
@@ -39,28 +41,28 @@
                         <thead>
                             <tr>
                                 <th>
-                                    Forums
+                                    Topics
                                 </th>
                                 <th>
-                                    Topics
+                                    Threads
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($forums->load('topics') as $forum)
+                            @foreach ($topics->load('threads') as $topic)
                             <tr>
                                 <td>
-                                    <a href="{{ route('topics.index', $forum->id) }}">{{ $forum->title }}</a>
+                                    {{ $topic->title }}
                                 </td>
                                 <td>
-                                    {{ $forum->topics->count() }}
+                                    {{ $topic->threads->count() }}
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
 
-                    {{ $forums->links('vendor.pagination.bootstrap-4') }}
+                    {{ $topics->links('vendor.pagination.bootstrap-4') }}
 
                 </div>
             </div>

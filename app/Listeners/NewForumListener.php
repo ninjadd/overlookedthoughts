@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\NewForumEvent;
 use App\Models\Forum;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Str;
 
 class NewForumListener
@@ -35,6 +33,6 @@ class NewForumListener
         $forum->slug = Str::slug($event->request->title.'-'.random_int(100000, 999999));
         $forum->description = $event->request->description;
         $forum->save();
-        
+
     }
 }
