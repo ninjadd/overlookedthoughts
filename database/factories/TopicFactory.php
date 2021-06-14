@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Topic;
 use App\Models\Forum;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -24,16 +23,15 @@ class TopicFactory extends Factory
      */
     public function definition()
     {
-        $userIds = User::all()->pluck('id');
         $title = $this->faker->words('2', true);
         $slug = Str::slug($title);
-        $forumIds = Forum::all()->pluck('id');
+        $forum = Forum::inRandomOrder()->first();
 
         return [
-            'user_id' => $this->faker->randomElement($userIds),
-            'forum_id' => $this->faker->randomElement($forumIds),
+            'user_id' => $forum->user_id,
+            'forum_id' => $forum->id,
             'title' => $title,
-            'slug' => $slug,
+            'slug' => $slug.'-'.random_int(100000, 999999),
             'description' => $this->faker->paragraph(7)
         ];
     }

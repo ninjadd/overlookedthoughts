@@ -6,7 +6,9 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Home</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active">Home</li>
+                    </ol>
                 </div>
 
                 <div class="card-body">

@@ -30,7 +30,7 @@ class ForumFactory extends Factory
         return [
             'user_id' => $this->faker->randomElement($userIds),
             'title' => $title,
-            'slug' => $slug,
+            'slug' => $slug.'-'.random_int(100000, 999999),
             'description' => $this->faker->paragraph(7)
         ];
     }

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Thread;
 use App\Models\Topic;
+use App\Models\Forum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -24,16 +25,16 @@ class ThreadFactory extends Factory
      */
     public function definition()
     {
-        $userIds = User::all()->pluck('id');
         $title = $this->faker->words('2', true);
         $slug = Str::slug($title);
-        $topicIds = Topic::all()->pluck('id');
+        $topic = Topic::inRandomOrder()->first();
 
         return [
-            'user_id' => $this->faker->randomElement($userIds),
-            'topic_id' => $this->faker->randomElement($topicIds),
+            'user_id' => $topic->user_id,
+            'forum_id' => $topic->forum_id,
+            'topic_id' => $topic->id,
             'title' => $title,
-            'slug' => $slug.'|'.$this->faker->randomElement($topicIds),
+            'slug' => $slug.'-'.random_int(100000, 999999),
             'body' => $this->faker->paragraph(24)
         ];
     }

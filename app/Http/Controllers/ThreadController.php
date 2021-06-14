@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Forum;
 use App\Models\Thread;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
@@ -12,9 +14,14 @@ class ThreadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Forum $forum, Topic $topic)
     {
-        //
+        $threads = Thread::where('forum_id', $forum->id)
+            ->where('topic_id', $topic->id)
+            ->orderBy('updated_at', 'DESC')
+            ->paginate(10);
+
+        return view('threads.index', compact('forum', 'topic', 'threads'));
     }
 
     /**

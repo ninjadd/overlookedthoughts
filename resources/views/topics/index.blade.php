@@ -6,7 +6,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Topics</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Topics</li>
+                    </ol>
                 </div>
 
                 <div class="card-body">
@@ -52,7 +55,7 @@
                             @foreach ($topics->load('threads') as $topic)
                             <tr>
                                 <td>
-                                    {{ $topic->title }}
+                                    <a href="{{ route('threads.index', [$forum->id, $topic->id]) }}">{{ $topic->title }}</a>
                                 </td>
                                 <td>
                                     {{ $topic->threads->count() }}

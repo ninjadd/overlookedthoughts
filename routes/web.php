@@ -27,3 +27,6 @@ Route::get('forums/{forum}/topics', [App\Http\Controllers\TopicController::class
 
 Route::post('forums/{forum}/topics', [App\Http\Controllers\TopicController::class, 'store'])->name('topics.store')->middleware('web');
 
+Route::get('forums/{forum}/topics/{topic}/threads', [App\Http\Controllers\ThreadController::class, 'index'])->name('threads.index');
+
+
