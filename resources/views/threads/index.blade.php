@@ -50,6 +50,10 @@
                         @endforeach
                     </div>
 
+                    <div>
+                        Put form here
+                    </div>
+
                 </div>
 
                 <div class="card-footer">
