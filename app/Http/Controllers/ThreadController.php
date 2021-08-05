@@ -19,7 +19,7 @@ class ThreadController extends Controller
         $threads = Thread::where('forum_id', $forum->id)
             ->where('topic_id', $topic->id)
             ->orderBy('updated_at', 'DESC')
-            ->paginate(10);
+            ->get();
 
         return view('threads.index', compact('forum', 'topic', 'threads'));
     }
@@ -40,9 +40,9 @@ class ThreadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Forum $forum, Topic $topic, Request $request)
     {
-        //
+        return [$request->all(), $forum, $topic];
     }
 
     /**
